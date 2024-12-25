@@ -1,0 +1,81 @@
+# https://esphome.io/components/substitutions
+substitutions:
+  git_rev: undefined
+  debug_update_interval: 30s
+
+# https://esphome.io/components/wifi
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  fast_connect: true
+  power_save_mode: none
+
+  # ap:
+  #   ssid: ${friendly_name} Fallback AP
+  #   password: !secret wifi_ap_password
+
+# captive_portal:
+
+# AP and/or Captive portal causes random reboots on ESP32-S2 board :(
+# See: https://github.com/esphome/issues/issues/1679
+#      https://community.home-assistant.io/t/cant-stop-esphome-restarting-with-weak-wifi/453821/21
+
+# https://esphome.io/components/mqtt
+mqtt:
+  broker: !secret mqtt_broker
+  port: 1883
+  discovery: true
+  discovery_unique_id_generator: mac
+
+# https://esphome.io/components/ota
+ota:
+  platform: esphome
+  password: !secret ota_password
+
+# https://esphome.io/components/safe_mode
+safe_mode:
+  disabled: false
+
+# https://esphome.io/components/debug
+debug:
+  update_interval: ${debug_update_interval}
+
+button:
+  - platform: safe_mode
+    name: "Restart in Safe Mode"
+    icon: "mdi:restart-alert"
+
+  - platform: restart
+    name: "Restart"
+    icon: "mdi:restart"
+
+sensor:
+  - platform: debug
+    loop_time:
+      name: "Loop Time"
+
+    # https://esphome.io/components/sensor/uptime
+  - platform: uptime
+    update_interval: ${debug_update_interval}
+    name: Uptime Sensor
+
+    # https://esphome.io/components/sensor/wifi_signal
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: ${debug_update_interval}
+
+text_sensor:
+  - platform: debug
+    reset_reason:
+      name: "Reset Reason"
+
+  - platform: version
+    name: "ESPHome Version"
+    hide_timestamp: true
+
+  - platform: template
+    name: "Git Rev"
+    icon: "mdi:source-repository"
+    entity_category: "diagnostic"
+    lambda: |-
+      return {"${git_rev}"};

@@ -8,4 +8,4 @@ mqtt:
   topic_prefix: esphome/devices/ldk_smart_plug_1
 
 packages:
-  base: !include { file: .base.yaml }
+  base: !include .base.yaml
