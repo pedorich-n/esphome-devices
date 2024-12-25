@@ -48,7 +48,7 @@ binary_sensor:
     name: "Status"
 
 sensor:
-    # https://esphome.io/components/sensor/cse7766
+  # https://esphome.io/components/sensor/cse7766
   - platform: cse7766
     current:
       name: "Current"
