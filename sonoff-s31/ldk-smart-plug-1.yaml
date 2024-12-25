@@ -1,0 +1,11 @@
+esphome:
+  name: ldk-smart-plug-1
+  friendly_name: "LDK Smart Plug 1"
+
+mqtt:
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  topic_prefix: esphome/devices/ldk_smart_plug_1
+
+packages:
+  base: !include { file: .base.yaml }
