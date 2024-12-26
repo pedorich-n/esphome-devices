@@ -9,6 +9,7 @@ wifi:
   password: !secret wifi_password
   fast_connect: true
   power_save_mode: none
+  domain: .lan
 
   # ap:
   #   ssid: ${friendly_name} Fallback AP
