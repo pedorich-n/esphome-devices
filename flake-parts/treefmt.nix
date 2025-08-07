@@ -9,7 +9,7 @@
 
       programs = {
         # Nix
-        nixpkgs-fmt.enable = true;
+        nixfmt.enable = true;
         deadnix.enable = true;
         statix.enable = true;
 

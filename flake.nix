@@ -12,12 +12,16 @@
     };
   };
 
-  outputs = inputs@{ flake-parts, systems, ... }: flake-parts.lib.mkFlake { inherit inputs; } ({ lib, ... }: {
-    systems = import systems;
+  outputs =
+    inputs@{ flake-parts, systems, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      { lib, ... }:
+      {
+        systems = import systems;
 
-    debug = true;
+        debug = true;
 
-    imports = lib.filesystem.listFilesRecursive ./flake-parts;
-  });
+        imports = lib.filesystem.listFilesRecursive ./flake-parts;
+      }
+    );
 }
-
