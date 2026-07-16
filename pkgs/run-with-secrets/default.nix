@@ -1,9 +1,13 @@
-{ pkgs, ... }:
-pkgs.writeShellApplication {
+{
+  writeShellApplication,
+  gitMinimal,
+  fd,
+}:
+writeShellApplication {
   name = "run-with-secrets";
   runtimeInputs = [
-    pkgs.gitMinimal
-    pkgs.fd
+    gitMinimal
+    fd
   ];
 
   # op binary must be provided by the host system
