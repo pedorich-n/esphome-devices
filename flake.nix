@@ -1,6 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+    self.submodules = true;
+
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/x86_64-linux";
 
