@@ -10,10 +10,12 @@
   outputs =
     inputs@{ flake-parts, systems, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } (
-      { lib, ... }:
+      {
+        lib,
+        ...
+      }:
       {
         systems = import systems;
-
         debug = true;
 
         imports = lib.filesystem.listFilesRecursive ./flake-parts;
