@@ -1,11 +1,13 @@
 {
   perSystem =
-    { pkgs, ... }:
+    {
+      pkgs,
+      ...
+    }:
     {
       packages = rec {
-        run-with-secrets = pkgs.callPackage ../pkgs/run-with-secrets { };
-
-        esphome-with-secrets = pkgs.callPackage ../pkgs/esphome-with-secrets { inherit run-with-secrets; };
+        run-with-secrets = pkgs.callPackage ../nix/packages/run-with-secrets.nix { };
+        esphome-with-secrets = pkgs.callPackage ../nix/packages/esphome-with-secrets.nix { inherit run-with-secrets; };
       };
     };
 }

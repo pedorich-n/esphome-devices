@@ -16,6 +16,11 @@ writeShellApplication {
     export ROOT
     RUNTIME_SECRETS="''${ROOT}/devices/common/secrets.yaml"
 
+    if ! [ -x "$(command -v op)" ]; then
+      echo "Error: 1Password CLI (op) not found in PATH!" >&2
+      exit 1
+    fi
+
     function cleanup() {
       if [ -f "''${RUNTIME_SECRETS}" ]; then
         rm "''${RUNTIME_SECRETS}"
