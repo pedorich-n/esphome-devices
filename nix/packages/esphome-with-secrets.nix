@@ -2,7 +2,6 @@
   run-with-secrets,
   esphome,
   platformio,
-  platformio-core,
   gitMinimal,
   writeShellApplication,
 }:
@@ -10,7 +9,6 @@ let
   coreDependencies = [
     esphome
     platformio
-    platformio-core
   ];
 in
 writeShellApplication {
