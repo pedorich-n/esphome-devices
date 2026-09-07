@@ -19,10 +19,10 @@ button:
       - delay: 5s
       - switch.turn_off: pump_plant_${num}
 
-  # - platform: template
-  #   name: "Pump Plant ${num} Long"
-  #   id: pump_plant_${num}_long_press
-  #   on_press:
-  #     - switch.turn_on: pump_plant_${num}
-  #     - delay: 30s
-  #     - switch.turn_off: pump_plant_${num}
+  - platform: template
+    name: "Pump Plant ${num} Long"
+    id: pump_plant_${num}_long_press
+    on_press:
+      - switch.turn_on: pump_plant_${num}
+      - delay: 15s # ~200ml
+      - switch.turn_off: pump_plant_${num}
