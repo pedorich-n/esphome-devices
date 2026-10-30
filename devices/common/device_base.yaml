@@ -33,43 +33,7 @@ ota:
   platform: esphome
   password: !secret ota_password
 
-# https://esphome.io/components/safe_mode
-safe_mode:
-  disabled: false
-
-# https://esphome.io/components/debug
-debug:
-  update_interval: ${debug_update_interval}
-
-button:
-  - platform: safe_mode
-    name: "Restart in Safe Mode"
-    icon: "mdi:restart-alert"
-
-  - platform: restart
-    name: "Restart"
-    icon: "mdi:restart"
-
-sensor:
-  - platform: debug
-    loop_time:
-      name: "Loop Time"
-
-    # https://esphome.io/components/sensor/uptime
-  - platform: uptime
-    update_interval: ${debug_update_interval}
-    name: Uptime Sensor
-
-    # https://esphome.io/components/sensor/wifi_signal
-  - platform: wifi_signal
-    name: "WiFi Signal"
-    update_interval: ${debug_update_interval}
-
 text_sensor:
-  - platform: debug
-    reset_reason:
-      name: "Reset Reason"
-
   - platform: version
     name: "ESPHome Version"
     hide_timestamp: true
