@@ -1,0 +1,46 @@
+esphome:
+  name: ldk-plant-pump-controller
+  friendly_name: "LDK Plant Pump Controller"
+
+esp32:
+  board: esp32-c3-devkitm-1
+  variant: esp32c3
+  framework:
+    type: esp-idf
+    version: recommended
+
+wifi:
+  output_power: 8.5 # https://github.com/esphome/issues/issues/4893
+
+mqtt:
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  topic_prefix: esphome/devices/ldk_plant_pump_controller
+
+logger:
+  level: INFO
+
+# web_server:
+#   port: 80
+
+packages:
+  shared_base: !include ../common/device_base.yaml
+
+  # prettier-ignore
+  pump_1: !include { file: .pump_buttons.yaml, vars: { num: 1, pin: 10 } }
+  # prettier-ignore
+  pump_2: !include { file: .pump_buttons.yaml, vars: { num: 2, pin: 7 } }
+  # prettier-ignore
+  pump_3: !include { file: .pump_buttons.yaml, vars: { num: 3, pin: 6 } }
+  # prettier-ignore
+  pump_4: !include { file: .pump_buttons.yaml, vars: { num: 4, pin: 5 } }
+
+button:
+  - platform: template
+    name: "Stop All Plant Pumps"
+    id: stop_all_plant_pumps
+    on_press:
+      - switch.turn_off: pump_plant_1
+      - switch.turn_off: pump_plant_2
+      - switch.turn_off: pump_plant_3
+      - switch.turn_off: pump_plant_4

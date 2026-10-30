@@ -1,0 +1,28 @@
+# Expected ${num} to substitute for component number
+# Expected ${pin} to substitute for the gpio pin
+
+switch:
+  - platform: gpio
+    name: "Pump Plant ${num}"
+    id: pump_plant_${num}
+    pin:
+      number: ${pin}
+      inverted: true
+    restore_mode: ALWAYS_OFF
+
+button:
+  - platform: template
+    name: "Pump Plant ${num} Short"
+    id: pump_plant_${num}_short_press
+    on_press:
+      - switch.turn_on: pump_plant_${num}
+      - delay: 5s
+      - switch.turn_off: pump_plant_${num}
+
+  - platform: template
+    name: "Pump Plant ${num} Long"
+    id: pump_plant_${num}_long_press
+    on_press:
+      - switch.turn_on: pump_plant_${num}
+      - delay: 15s # ~200ml
+      - switch.turn_off: pump_plant_${num}
